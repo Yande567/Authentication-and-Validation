@@ -15,9 +15,14 @@
     
     <div class="container">
          {% if messages %}
-            <ul class="messages">
+            <!--suppress GrazieInspection -->
+        <ul class="messages">
                 {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% if message.tags %}
+                <li class="{{ message.tags }}">
+                {{ message }}
+                </li>
+                {% endif %}
                 {% endfor %}
             </ul>
         {% endif %}
@@ -25,27 +30,23 @@
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                 <form action="signin" method="post">
-                   
+                    {% csrf_token %}
                     <fieldset>
                         <h2>Please Sign In</h2>
                         <hr class="colorgraph">
-                        <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
-                        </div>
+
+                        {{ form }}
 
                         <span class="button-checkbox">
                             <button type="button" class="btn" data-color="info">Remember Me</button>
                             <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
-                            <a href="forgot_password" class="btn btn-link pull-right">Forgot Password?</a>
+                            <a href="password_reset" class="btn btn-link pull-right">Forgot Password?</a>
                         </span>
 
                         <hr class="colorgraph">
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
-                               <a href="/"  class="btn btn-lg btn-success btn-block" type="submit">Sign In</a>
+                                <button type="submit" class="btn btn-lg btn-success btn-block" > Signin </button>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <a href="signup" class="btn btn-lg btn-primary btn-block">Register</a>
