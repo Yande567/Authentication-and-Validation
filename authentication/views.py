@@ -74,8 +74,6 @@ def signout(request):
 
 def password_reset_request(request):
     try:
-        form = PasswordResetForm()
-        context = {'password_rest_form': form}
         if request.method == "POST":
             form = PasswordResetForm(request.POST)
             if form.is_valid():

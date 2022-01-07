@@ -19,8 +19,8 @@ class SignUpForm(UserCreationForm):
         attrs={'class': 'form-group form-control  input-lg col-md-6',
                'placeholder': 'Confirm Password'}), )
 
-    # check = forms.BooleanField(label='', required=True, widget=forms.CheckboxInput(
-    #   attrs={'class': 'row col-xs-4 col-sm-3 col-md-3 button-checkbox', 'placeholder': 'I Agree'}))
+    check = forms.BooleanField(label='', required=True, widget=forms.CheckboxInput(
+         attrs={'class': 'row col-xs-4 col-sm-3 col-md-3 button-checkbox', 'placeholder': 'I Agree'}))
 
     class Meta:
         model = User
