@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- semantic UI -->
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <style>
+        hidden {
+            visibility: hidden;
+        }
+    </style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Selection</title>
+</head>
+<body>
+    <form class="container" id="country-selection-form">
+        {% csrf_token %}
+
+
+         <div class="row" style="margin-top:20px">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <div class="ui selection dropdown" id="countries">
+                  <input type="hidden" name="country">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" id="country-text">Select a Country</div>
+
+                  <div class="menu" id="country-data-box"></div>
+                </div>
+            </div>
+         </div>
+
+
+         <div class="row" style="margin-top:20px">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <div class="ui selection dropdown" id="provinces">
+                  <input type="hidden" name="province">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" id="province-text">Select a Province</div>
+
+                  <div class="menu" id="province-data-box"></div>
+                </div>
+            </div>
+         </div>
+
+        <div class="row" style="margin-top:20px">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <div class="ui selection dropdown" id="cities">
+                  <input type="hidden" name="city">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" id="city-text">Select a City</div>
+
+                  <div class="menu" id="city-data-box"></div>
+                </div>
+            </div>
+         </div>
+
+        <div class="bg-light row" >
+            <div class="invisible" id="btn-box">
+                <div class="col-md-12 d-grid gap-2 col-6 ">
+                    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                </div>
+            </div>
+        </div>
+
+     </form>
+
+     <!-- Semantics javascript code -->
+    <script>
+        $('.ui.dropdown').dropdown({
+            forceSelection: false
+        });
+
+    </script>
+
+    <!-- Main javascript code -->
+    <script>
+        const countryDataBox = document.getElementById('country-data-box')
+        const countryInput = document.getElementById('countries')
+        const countryText = document.getElementById('country-text')
+
+        const provinceDataBox = document.getElementById('province-data-box')
+        const provinceInput = document.getElementById('provinces')
+        const provinceText = document.getElementById('province-text')
+
+        const cityDataBox = document.getElementById('city-data-box')
+        const cityInput = document.getElementById('cities')
+        const cityText = document.getElementById('city-text')
+
+        const btnBox = document.getElementById('btn-box')
+
+        const countryForm = document.getElementById('country-selection-form')
+
+        const csrf = document.getElementsByName('csrfmiddlewaretoken')
+
+        $.ajax({
+            type: 'GET',
+            url: 'get_json_response/',
+            success: function(response){
+                console.log(response.data)
+                const countryData = response.data
+                countryData.map(item=>{
+                    const option = document.createElement('div')
+                    option.textContent = item.name
+                    option.setAttribute('class', 'item')
+                    option.setAttribute('data-value', item.name)
+                    countryDataBox.appendChild(option)
+                })
+            },
+            error: function(error){
+                console.log(error)
+            }
+        })
+
+        provinceDataBox.innerHTML = ""
+        countryInput.addEventListener('change', e=>{
+        console.log(e.target.value)
+        const selectedCountry = e.target.value
+
+        provinceDataBox.innerHTML = ""
+        provinceText.textContent = "Select a Province"
+        provinceText.classList.add("default")
+
+        $.ajax({
+            type: 'GET',
+            url: `province_json/${selectedCountry}/`,
+            success: function(response){
+                console.log(response.data)
+                const provinceData = response.data
+                provinceData.map(item=>{
+                    const option = document.createElement('div')
+                    option.textContent = item.name
+                    option.setAttribute('class', 'item')
+                    option.setAttribute('data-value', item.name)
+                    provinceDataBox.appendChild(option)
+                })
+            },
+            error: function(error){
+                console.log(error)
+            }
+            })
+        })
+
+        provinceInput.addEventListener('change', e=>{
+        console.log(e.target.value)
+        const selectedProvince = e.target.value
+
+        cityDataBox.innerHTML = ""
+        cityText.textContent = "Select a City"
+        cityText.classList.add("default")
+
+        $.ajax({
+            type: 'GET',
+            url: `city_json/${selectedProvince}/`,
+            success: function(response){
+                console.log(response.data)
+                const cityData = response.data
+                cityData.map(item=>{
+                    const option = document.createElement('div')
+                    option.textContent = item.name
+                    option.setAttribute('class', 'item')
+                    option.setAttribute('data-value', item.name)
+                    cityDataBox.appendChild(option)
+                })
+                cityInput.addEventListener('change', e=>{
+                    btnBox.classList.remove("invisible")
+                })
+            },
+            error: function(error){
+                console.log(error)
+            }
+            })
+        })
+
+        countryForm.addEventListener('submit', e=>{
+            e.preventDefault()
+            console.log('submitted')
+
+            $.ajax({
+                type: 'POST',
+                url: 'save_country_selection/',
+                data: {
+                    'csrfmiddlewaretoken': csrf[0].value,
+                    'country': countryText.textContent,
+                    'province': provinceText.textContent,
+                    'city': cityText.textContent,
+                },
+                success: function(response){
+                    console.log(response)
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
