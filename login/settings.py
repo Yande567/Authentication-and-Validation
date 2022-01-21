@@ -36,17 +36,37 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'address'
+    'address',
     'authentication',
 
     'crispy_forms',
     'social_django',
-
+    'cities_light',
 
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CITIES_LIGHT_APP_NAME = 'address'
+
+# Authentication backeeds for social authentication
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Provided after registering app with Google. see google developer console
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '189319797332-j2337vur985agn0fvqsoqilrd5mcn8n8.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_TOKEN_URL = 'https://oauth2.googleapis.com/token'
+
+
+# Add this if python-social-auth is been used
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# Django Social Auth
+LOGIN_URL = 'https://accounts.google.com/o/oauth2/auth'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,6 +148,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# For Sending Mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
@@ -135,9 +156,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'musondayande293@gmail.com'
 EMAIL_HOST_PASSWORD = 'MySp@mA/cP@$$word'
 
-LOGIN_REDIRECT_URL = 'home'
-LOGIN_URL = 'signin'
-
+# Configuration for Django Cities Light where countries included = Zambia
 CITIES_LIGHT_TRANSLATION_LANGUAGES = ['en']
 CITIES_LIGHT_INCLUDE_COUNTRIES = ['ZM']
 CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLF', 'PPLG',
