@@ -51,20 +51,33 @@ CITIES_LIGHT_APP_NAME = 'address'
 # Authentication backeeds for social authentication
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.linkedin.LinkedinOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 # Provided after registering app with Google. see google developer console
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '189319797332-j2337vur985agn0fvqsoqilrd5mcn8n8.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-SOCIAL_AUTH_GOOGLE_OAUTH2_TOKEN_URL = 'https://oauth2.googleapis.com/token'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_TOKEN_URL = ''
 
+# Provided after registering app with Linkedin. see Linkedin developer console
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = ''
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = ''
+# Add email to requested authorizations.
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_liteprofile', 'r_emailaddress']
+# Add the fields so they will be requested from linkedin.
+SOCIAL_AUTH_LINKEDIN_OAUTH2_FIELD_SELECTORS = ['emailAddress']
+# Arrange to add the fields to UserSocialAuth.extra_data
+SOCIAL_AUTH_LINKEDIN_OAUTH2_EXTRA_DATA = [('id', 'id'),
+                                          ('firstName', 'first_name'),
+                                          ('lastName', 'last_name'),
+                                          ('emailAddress', 'email_address')]
 
 # Add this if python-social-auth is been used
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # Django Social Auth
-LOGIN_URL = 'https://accounts.google.com/o/oauth2/auth'
+LOGIN_URL = ''
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -153,8 +166,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'musondayande293@gmail.com'
-EMAIL_HOST_PASSWORD = 'MySp@mA/cP@$$word'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 # Configuration for Django Cities Light where countries included = Zambia
 CITIES_LIGHT_TRANSLATION_LANGUAGES = ['en']
