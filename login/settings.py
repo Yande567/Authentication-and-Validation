@@ -35,8 +35,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'address'
     'authentication',
+
     'crispy_forms',
+    'social_django',
+
 
 ]
 
@@ -131,3 +136,9 @@ EMAIL_HOST_PASSWORD = 'MySp@mA/cP@$$word'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'signin'
+
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['en']
+CITIES_LIGHT_INCLUDE_COUNTRIES = ['ZM']
+CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLF', 'PPLG',
+                                   'PPLL', 'PPLR', 'PPLS', 'STLMT', 'ADM1']
+CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities5000.zip']
