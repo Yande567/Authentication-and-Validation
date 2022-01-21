@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CITIES_LIGHT_APP_NAME = 'address'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
