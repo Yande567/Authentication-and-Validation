@@ -50,10 +50,22 @@
                         <div class="col-xs-12 col-md-6"><a href="signin" class="btn btn-success btn-block btn-lg">Sign In</a></div>
                     </div>
 
+                     <hr class="colorgraph">
+
+                       <div class="row">
+                            <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
+                                    Sign Up With Google
+                            </a>
+
+                            <a class="btn btn-secondary" href="{% url 'social:begin' 'linkedin-oauth2' %}">
+                                    Sign Up With Linkedin
+                            </a>
+                       </div>
+
 
                 </form>
             </div>
         </div>
 
- </body>
+</body>
 </html>

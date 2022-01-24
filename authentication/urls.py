@@ -1,8 +1,7 @@
-from django.conf.urls import include
-from django.contrib import admin
 from django.urls import path, include
+from login import settings
 from . import views
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, logout
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -21,5 +20,8 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
         template_name='authentication/password/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('', include('social_django.urls', namespace='social')),
+    path('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL},
+         name='logout'),
 
 ]
