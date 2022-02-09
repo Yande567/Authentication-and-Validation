@@ -23,4 +23,7 @@ app_name = "authentication"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
+    path('', include('address.urls')),
+    path('', include('multipleselect.urls')),
+
 ]
