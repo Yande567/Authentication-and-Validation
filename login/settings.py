@@ -57,13 +57,13 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Provided after registering app with Google. see google developer console
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '189319797332-j2337vur985agn0fvqsoqilrd5mcn8n8.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-SOCIAL_AUTH_GOOGLE_OAUTH2_TOKEN_URL = 'https://oauth2.googleapis.com/token'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_TOKEN_URL = ''
 
 # Provided after registering app with Linkedin. see Linkedin developer console
-SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '86qtpk4ff0vstf'
-SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'wSmQtPN2xdaV0Giw'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = ''
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = ''
 # Add email to requested authorizations.
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_liteprofile', 'r_emailaddress']
 # Add the fields so they will be requested from linkedin.
@@ -182,8 +182,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'musondayande293@gmail.com'
-EMAIL_HOST_PASSWORD = 'MySp@mA/cP@$$word'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 # Configuration for Django Cities Light where countries included = Zambia
 CITIES_LIGHT_TRANSLATION_LANGUAGES = ['en']
